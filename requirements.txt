@@ -7,3 +7,4 @@ SQLAlchemy==1.0.4
 whitenoise==2.0.2
 livereload
 djangorestframework==3.3.2
+django-extensions==1.6.1
