@@ -1,0 +1,1 @@
+web: gunicorn threestrandcode.wsgi --log-file -
