@@ -5,7 +5,7 @@ from . import views
 
 
 router = routers.DefaultRouter()
-router.register(r'applicants', views.ApplicationViewSet)
+router.register(r'applicants', views.ApplicationViewSet, 'applicants')
 
 
 # Wire up our API using automatic URL routing.

@@ -40,6 +40,7 @@ THIRD_PARTY_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'django_extensions',
+    'rest_framework_swagger',
 )
 OUR_APPS = (
     'pages',
@@ -113,3 +114,11 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# Django rest framework.
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        # Let's make everything require admin permissions by default
+        'rest_framework.permissions.IsAdminUser',
+    )
+}

@@ -8,3 +8,5 @@ whitenoise==2.0.2
 livereload
 djangorestframework==3.3.2
 django-extensions==1.6.1
+fake-factory==0.5.3
+loremipsum==1.0.5
