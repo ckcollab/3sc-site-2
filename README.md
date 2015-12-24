@@ -1,6 +1,6 @@
-3SC API
+[3SC API]
 =======
 
-The backend to 3 Strand Code.  Checkout the [docs].
+The backend to 3 Strand Code.
 
-[docs]: http://threesc-api.herokuapp.com/docs
+[3SC API]: http://threesc-api.herokuapp.com/docs
