@@ -18,3 +18,5 @@ class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.AssignmentSerializer
     # TODO: Superuser can view/modify anything. Regular user can only view/modify their own
     #permission_classes = (permissions.,)
+
+    # list method should just return for request.user not all!

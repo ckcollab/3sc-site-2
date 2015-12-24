@@ -24,7 +24,7 @@ class MakeRepository(Assignment):
 
     def do_completed_check(self):
         # check if name exists
-        super()
+        return super()
 
 
 class MakeGHPage(Assignment):
@@ -33,4 +33,4 @@ class MakeGHPage(Assignment):
 
     def do_completed_check(self):
         # check if name exists
-        super()
+        return super()
