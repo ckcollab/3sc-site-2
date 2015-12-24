@@ -12,3 +12,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
+
+# Force HTTPS links
+os.environ['HTTPS'] = "on"
+os.environ['wsgi.url_scheme'] = 'https'
