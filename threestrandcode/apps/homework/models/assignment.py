@@ -22,6 +22,7 @@ class Assignment(models.Model):
     def get_missing_pre_reqs(self):
         """Returns a list of missing pre reqs OR a message describing the problem"""
         if hasattr(self, "pre_reqs"):
+            # pre_reqs are classes, like MakeGHPage
             missing_pre_reqs = list(filter(lambda x: not x.check_user_has_completed(self.user), self.pre_reqs))
         else:
             missing_pre_reqs = None

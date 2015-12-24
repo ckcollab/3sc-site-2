@@ -1,3 +1,5 @@
+import requests
+
 from .assignment import Assignment
 
 
@@ -7,7 +9,13 @@ class GithubSignUp(Assignment):
         return "I need your github username first"
 
     def do_completed_check(self):
-        super()
+        if self.user.application.github_name:
+            resp = requests.get('https://github.com/%s' % self.user.application.github_name)
+            self.completed = resp.status_code == 200
+        else:
+            self.completed = False
+        self.save()
+        return self.completed
 
 
 class MakeRepository(Assignment):
