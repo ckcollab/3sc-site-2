@@ -2,3 +2,5 @@ ipdb
 pytest
 pytest-django
 pytest-xdist
+fake-factory==0.5.3
+loremipsum==1.0.5
