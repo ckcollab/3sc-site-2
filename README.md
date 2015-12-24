@@ -1,1 +1,4 @@
-# 3sc website
+3SC API
+=======
+
+The backend to 3 Strand Code.
