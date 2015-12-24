@@ -6,14 +6,11 @@ from django.utils import timezone
 
 
 class Assignment(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="%(class)s")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="assignments")
     created = models.DateTimeField(default=timezone.now)
     started = models.DateTimeField(null=True, blank=True)
     pre_reqs_completed = models.BooleanField(default=False)
     completed = models.BooleanField(default=False)
-
-    class Meta:
-        abstract = True
 
     @classmethod
     def check_user_has_completed(cls, user):
@@ -32,5 +29,6 @@ class Assignment(models.Model):
         self.save()
         return missing_pre_reqs
 
+    @abc.abstractclassmethod
     def do_completed_check(self):
         raise NotImplementedError()
