@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply to 3 Strand Code</title>
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script>
+        var threesc = function () {
+            var self = this;
+            self.BASE_URL = "http://localhost:8000";
+
+            // Gets the required context variables, should be put in local storage ??
+            /*self.init = function() {
+             $.get(self.BASE_URL + "/init/")
+             .success(function(data) {
+             self.login("admin", "admin");
+             })
+             .error(function(response) {
+             console.log(response);
+             });
+             };*/
+            self.init = function () {
+                var auth_key = localStorage.getItem("3sc_api_auth_key");
+                if (auth_key === "null" || auth_key === null || auth_key === undefined) {
+                    self.login("admin", "admin");
+                } else {
+                    self.set_auth_key(auth_key);
+                }
+            };
+
+            self.set_auth_key = function (auth_key) {
+                self.auth_key = auth_key;
+                localStorage.setItem("3sc_api_auth_key", auth_key);
+                function safe_method(method) {
+                    return (/^(HEAD|OPTIONS|TRACE)$/.test(method));
+                }
+
+                $.ajaxSetup({
+                    beforeSend: function (xhr, settings) {
+                        if (!safe_method(settings.type)) {
+                            xhr.setRequestHeader("Authorization", "Token " + self.auth_key);
+                        }
+                    }
+                });
+            };
+
+            // Logs in...
+            self.login = function (username, password) {
+                $.ajax({
+                    type: "POST",
+                    url: self.BASE_URL + "/rest-auth/login/",
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function (data) {
+                        console.log("login");
+                        console.log(data.key);
+                        self.set_auth_key(data.key);
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    },
+                    dataType: "json"
+                });
+            };
+
+            self.apply = function () {
+
+            };
+
+            self.get_submissions = function () {
+                $.get(self.BASE_URL + "/api/applicants/")
+                    .success(function (data) {
+                        console.log("success");
+                        console.log(data);
+                    })
+                    .error(function (response) {
+                        console.log("error");
+                        console.log(response);
+                    })
+            };
+
+            return self;
+        }();
+
+        threesc.init();
+        //threesc.login("admin", "admin");
+    </script>
+</head>
+<body>
+<div class="row">
+    <form class="col s6 offset-s3">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">Apply</span>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="name" name="name" type="text" class="validate">
+                        <label for="name">Name</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="essay" class="validate materialize-textarea"></textarea>
+                        <label for="essay">Tell us about yourself! Talk about hobbies, achievements, and what makes you... you!</label>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <button type="submit" class="waves-effect waves-light btn">
+                        Apply <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

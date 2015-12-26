@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from . import serializers
 from .permissions import IsSuperUserOrPOSTing
 from applicants.models import Applicant
-from homework.models import Assignment
+from homework.models import Assignment, Recipe
 
 
 class ApplicationViewSet(viewsets.ModelViewSet):
@@ -20,3 +20,8 @@ class AssignmentViewSet(viewsets.ModelViewSet):
     #permission_classes = (permissions.,)
 
     # list method should just return for request.user not all!
+
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    queryset = Recipe.objects.all()
+    serializer_class = serializers.RecipeSerializer

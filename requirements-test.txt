@@ -1,3 +1,5 @@
+-r requirements.txt
+
 ipdb
 pytest
 pytest-django
@@ -5,3 +7,4 @@ pytest-xdist
 fake-factory==0.5.3
 loremipsum==1.0.5
 responses==0.5.0
+model-mommy==1.2.6

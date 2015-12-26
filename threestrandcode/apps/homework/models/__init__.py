@@ -1,3 +1,3 @@
 #from . import *
 from .assignment import *
-from .github import *
+from .recipe import *

@@ -1,20 +1,22 @@
-import abc
-
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from markupfield.fields import MarkupField
+
+from ..recipes import get_all_recipe_names
 
 
+RECIPES = get_all_recipe_names()
 
 
-class Assignment(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="assignments")
+class Recipe(models.Model):
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="recipes")
     created = models.DateTimeField(default=timezone.now)
-    started = models.DateTimeField(null=True, blank=True)
-    pre_reqs_completed = models.BooleanField(default=False)
-    completed = models.BooleanField(default=False)
-    recipe = models.ForeignKey("homework.Recipe")
-    deliverable = models.URLField(null=True, blank=True)
+    point_min = models.IntegerField(default=0)
+    point_max = models.IntegerField(default=0)
+    instructions = MarkupField(markup_type='markdown')
+    module = models.CharField(choices=RECIPES, max_length=128, unique=True)
+
 
 
 
@@ -23,15 +25,14 @@ class Assignment(models.Model):
     # TODO! Assignments should could some kind of deliverable...!?
     # TODO! Assignments should have some markdown instructions
 
+    def get_class(self):
+        module_name, class_name = self.module.split('.')
+        return getattr(__import__('homework.recipes.%s' % module_name, fromlist=(class_name,)), class_name)
+
+    def __str__(self):
+        return self.module
 
 
-
-
-
-
-    # def __unicode__(self):
-    #     return "%s - %s" % (self.user, self.__class__.__name__)
-    #
     # @classmethod
     # def check_user_has_completed(cls, user):
     #     try:

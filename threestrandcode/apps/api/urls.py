@@ -7,6 +7,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'applicants', views.ApplicationViewSet, 'applicants')
 router.register(r'assignments', views.AssignmentViewSet, 'assignments')
+router.register(r'recipes', views.RecipeViewSet, 'recipes')
 
 
 # Wire up our API using automatic URL routing.

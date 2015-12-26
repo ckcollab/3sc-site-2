@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from applicants.models import Applicant
-from homework.models import Assignment
+from homework.models import Assignment, Recipe
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
@@ -19,4 +19,17 @@ class AssignmentSerializer(serializers.ModelSerializer):
             'started',
             'pre_reqs_completed',
             'completed',
+        )
+
+
+class RecipeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recipe
+        fields = (
+            "creator",
+            "created",
+            "point_min",
+            "point_max",
+            "instructions",
+            "module",
         )

@@ -38,9 +38,13 @@ THIRD_PARTY_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_auth',
     'rest_framework',
-    'django_extensions',
+    'rest_framework.authtoken',
     'rest_framework_swagger',
+    'django_extensions',
+    'social.apps.django_app.default',
+    'corsheaders',
 )
 OUR_APPS = (
     'pages',
@@ -52,6 +56,7 @@ INSTALLED_APPS = THIRD_PARTY_APPS + OUR_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -76,6 +81,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
             'debug': DEBUG,
         },
@@ -83,6 +90,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'threestrandcode.wsgi.application'
+
+ALLOWED_HOSTS = ['*']
 
 
 # Database
@@ -120,5 +129,35 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         # Let's make everything require admin permissions by default
         'rest_framework.permissions.IsAdminUser',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+
+# Python Social Auth
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social.backends.github.GithubOAuth2',
+)
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get("GITHUB_KEY")
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get("GITHUB_SECRET")
+assert SOCIAL_AUTH_GITHUB_KEY and SOCIAL_AUTH_GITHUB_SECRET, "Missing Github API key env vars"
+
+# We don't want to add a new user, just modify some user detail
+SOCIAL_AUTH_PIPELINE = (
+    'applicants.social_pipeline.ensure_logged_in',
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'applicants.social_pipeline.save_github_name',
+    'social.pipeline.user.user_details',
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
