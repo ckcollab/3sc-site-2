@@ -136,16 +136,21 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
-
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'api.serializers.EmailLoginSerializer',
+}
 
 # Python Social Auth
 AUTHENTICATION_BACKENDS = (
+    'utils.authentication_backends.UserModelEmailBackend',
     'django.contrib.auth.backends.ModelBackend',
     'social.backends.github.GithubOAuth2',
 )
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get("GITHUB_KEY")
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get("GITHUB_SECRET")
-assert SOCIAL_AUTH_GITHUB_KEY and SOCIAL_AUTH_GITHUB_SECRET, "Missing Github API key env vars"
+
+if not os.environ.get("CIRCLECI"):
+    assert SOCIAL_AUTH_GITHUB_KEY and SOCIAL_AUTH_GITHUB_SECRET, "Missing Github API key env vars"
 
 # We don't want to add a new user, just modify some user detail
 SOCIAL_AUTH_PIPELINE = (
