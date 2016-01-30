@@ -1,3 +1,4 @@
+```
 Path
 |   Topic
 |   |   Course
@@ -105,9 +106,8 @@ Get A Job (25pts)
     Register in Meetups
         Dev Coop
         Innovation Collective
-
-//////////////////////////////////////////////////////////////////////////////////
-
+```
+***
 # Extension
 
 - [ ] Fly out shows list of assignments and statuses
