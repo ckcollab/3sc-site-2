@@ -9,21 +9,42 @@ from ..recipes import get_all_recipe_names
 RECIPES = get_all_recipe_names()
 
 
+class Path(models.Model):
+    title = models.CharField(max_length=64)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
+class Topic(models.Model):
+    path = models.ForeignKey(Path, related_name="topics")
+    title = models.CharField(max_length=64)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
+class Course(models.Model):
+    topic = models.ForeignKey(Topic, related_name="courses")
+    title = models.CharField(max_length=64)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
 class Recipe(models.Model):
+    course = models.ForeignKey(Course, related_name="recipes")
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="recipes")
     created = models.DateTimeField(default=timezone.now)
-    point_min = models.IntegerField(default=0)
-    point_max = models.IntegerField(default=0)
+    points = models.IntegerField(default=0)
+    required = models.BooleanField(default=True)
+    # point_max = models.IntegerField(default=0)
     instructions = MarkupField(markup_type='markdown')
+    # side_recipes = models.ManyToManyField("homework.Recipe", related_name="side_recipes")
     module = models.CharField(choices=RECIPES, max_length=128, unique=True)
-
-
-
-
-
-
-    # TODO! Assignments should could some kind of deliverable...!?
-    # TODO! Assignments should have some markdown instructions
 
     def get_class(self):
         module_name, class_name = self.module.split('.')

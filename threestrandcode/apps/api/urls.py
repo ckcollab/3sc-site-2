@@ -8,6 +8,9 @@ router = routers.DefaultRouter()
 router.register(r'applicants', views.ApplicationViewSet, 'applicants')
 router.register(r'assignments', views.AssignmentViewSet, 'assignments')
 router.register(r'recipes', views.RecipeViewSet, 'recipes')
+router.register(r'path', views.PathViewSet, 'path')
+router.register(r'topic', views.TopicViewSet, 'topic')
+router.register(r'course', views.CourseViewSet, 'course')
 
 
 # Wire up our API using automatic URL routing.

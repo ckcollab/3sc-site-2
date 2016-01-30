@@ -7,8 +7,8 @@ def home(request):
     return render(request, "index.html")
 
 
-def apply(request):
-    return render(request, "pages/apply.html")
+# def apply(request):
+#     return render(request, "pages/apply.html")
 
 
 def init(request):

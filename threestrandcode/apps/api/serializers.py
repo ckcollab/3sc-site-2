@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from rest_framework import serializers
 
 from applicants.models import Applicant
-from homework.models import Assignment, Recipe
+from homework.models import Assignment, Recipe, Path, Topic, Course
 
 from rest_auth.serializers import LoginSerializer
 
@@ -14,6 +14,9 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = ('name', 'email', 'essay')
 
 
+# ----------------------------------------------------------------------------
+# Homework
+# ----------------------------------------------------------------------------
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assignment
@@ -30,15 +33,49 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
         fields = (
+            "course",
             "creator",
             "created",
-            "point_min",
-            "point_max",
+            "points",
             "instructions",
             "module",
         )
 
 
+class PathSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Path
+        fields = (
+            "topics",
+            "title",
+            "description",
+        )
+
+
+class TopicSerializer(serializers.ModelSerializer):
+    # path = PathSerializer()
+
+    class Meta:
+        model = Topic
+        fields = (
+            "path",
+            "title",
+            "description",
+        )
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = (
+            "topic",
+            "title",
+            "description",
+        )
+
+# ----------------------------------------------------------------------------
+# Homework
+# ----------------------------------------------------------------------------
 class EmailLoginSerializer(LoginSerializer):
     def validate(self, attrs):
         username = attrs.get('username')

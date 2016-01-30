@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from . import serializers
 from .permissions import IsSuperUserOrPOSTing
 from applicants.models import Applicant
-from homework.models import Assignment, Recipe
+from homework.models import Assignment, Recipe, Path, Topic, Course
 
 
 class ApplicationViewSet(viewsets.ModelViewSet):
@@ -25,3 +25,20 @@ class AssignmentViewSet(viewsets.ModelViewSet):
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = serializers.RecipeSerializer
+
+
+# TODO Path, Topic, Course
+
+class PathViewSet(viewsets.ModelViewSet):
+    queryset = Path.objects.all()
+    serializer_class = serializers.PathSerializer
+
+
+class TopicViewSet(viewsets.ModelViewSet):
+    queryset = Topic.objects.all()
+    serializer_class = serializers.TopicSerializer
+
+
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = serializers.CourseSerializer
