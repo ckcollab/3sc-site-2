@@ -11,7 +11,7 @@ def home(request):
 #     return render(request, "pages/apply.html")
 
 
-def init(request):
-    return JsonResponse({
-        "csrf_token": get_token(request)
-    })
+# def init(request):
+#     return JsonResponse({
+#         "csrf_token": get_token(request)
+#     })

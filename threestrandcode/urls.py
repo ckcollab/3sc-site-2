@@ -1,12 +1,12 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from pages.views import home, apply, init
+from pages.views import home
 
 urlpatterns = [
     url(r'^$', home, name='home'),
-    url(r'^apply/', apply, name='apply'),
-    url(r'^init/', init, name='init'),
+    # url(r'^apply/', apply, name='apply'),
+    # url(r'^init/', init, name='init'),
 
     url(r'^api/', include('api.urls', namespace="api")),
     url(r'^rest-auth/', include('rest_auth.urls')),
