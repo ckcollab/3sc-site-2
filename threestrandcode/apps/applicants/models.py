@@ -10,7 +10,8 @@ class Applicant(models.Model):
         blank=True,
         help_text="When an Applicant is given a user account, that basically means they've been accepted into 3SC"
     )
-    name = models.CharField(max_length=64)
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
     email = models.EmailField(unique=True)
     essay = models.TextField()
     github_name = models.CharField(max_length=64, blank=True, null=True)

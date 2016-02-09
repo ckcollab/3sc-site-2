@@ -11,7 +11,12 @@ from rest_auth.serializers import LoginSerializer
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applicant
-        fields = ('name', 'email', 'essay')
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'essay'
+        )
 
 
 # ----------------------------------------------------------------------------
