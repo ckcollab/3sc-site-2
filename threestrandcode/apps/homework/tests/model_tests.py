@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
+from model_mommy import mommy
+
 #from homework.models import github as gh_assignments
-from ..models import Assignment, Recipe
+from ..models import Assignment, Recipe, Course, Topic, Path
 from ..recipes.github import SignUp, MakeRepository, MakeGHPage
 
 
@@ -11,20 +13,24 @@ class PreReqCheckTests(TestCase):
     def setUp(self):
         self.admin = User.objects.create_superuser(username="admin", password="test", email="admin@admin.com")
         self.user = User.objects.create_user(username="test", password="test")
+        self.course = mommy.make(Course)
         self.sign_up_recipe = Recipe.objects.create(
             creator=self.admin,
             instructions='',
-            module=SignUp.get_name()
+            module=SignUp.get_name(),
+            course=self.course,
         )
         self.make_repo_recipe = Recipe.objects.create(
             creator=self.admin,
             instructions='',
-            module=MakeRepository.get_name()
+            module=MakeRepository.get_name(),
+            course=self.course,
         )
         self.make_ghpage_recipe = Recipe.objects.create(
             creator=self.admin,
             instructions='',
-            module=MakeGHPage.get_name()
+            module=MakeGHPage.get_name(),
+            course=self.course,
         )
 
     def test_pre_reqs_check_at_least_one_level(self):

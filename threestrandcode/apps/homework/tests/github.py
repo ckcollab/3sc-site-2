@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from ..models import Assignment, Recipe
+from model_mommy import mommy
+
+from ..models import Assignment, Recipe, Course
 from ..recipes import SignUp, MakeGHPage, MakeRepository
 from applicants.models import Applicant
 
@@ -12,10 +14,12 @@ class GithubAssignmentTests(TestCase):
         self.admin = User.objects.create_superuser(username="admin", password="test", email="admin@admin.com")
         self.application = Applicant.objects.create(email="test@test.com")
         self.user = self.application.user
+        self.course = mommy.make(Course)
         self.sign_up_recipe = Recipe.objects.create(
             creator=self.admin,
             instructions='',
-            module=SignUp.get_name()
+            module=SignUp.get_name(),
+            course=self.course,
         )
 
     def test_check_github_signup_works(self):

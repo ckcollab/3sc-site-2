@@ -23,7 +23,8 @@ class TestPermissions(TestCase):
     def test_non_logged_in_can_post_applications(self):
         fake = Factory.create()
         resp = self.client.post(reverse("api:applicants-list"), {
-            "name": fake.name(),
+            "first_name": fake.first_name(),
+            "last_name": fake.last_name(),
             "email": fake.email(),
             "essay": "\n\n".join([generate_paragraph()[2] for _ in range(random.randint(2, 5))])
         })
