@@ -1,4 +1,4 @@
-[3SC API]
+[3SC API] [![Circle CI](https://circleci.com/gh/3-strand-code/3sc-api.svg?style=svg)](https://circleci.com/gh/3-strand-code/3sc-api)
 =======
 
 The backend to 3 Strand Code.
