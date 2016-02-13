@@ -79,7 +79,7 @@ class CourseSerializer(serializers.ModelSerializer):
         )
 
 # ----------------------------------------------------------------------------
-# Homework
+# EmailLogin
 # ----------------------------------------------------------------------------
 class EmailLoginSerializer(LoginSerializer):
     def validate(self, attrs):
@@ -87,10 +87,7 @@ class EmailLoginSerializer(LoginSerializer):
         email = attrs.get('email')
         password = attrs.get('password')
 
-        print(attrs)
-
         if email and password:
-            print("UH HELLO??")
             user = authenticate(email=email, password=password)
         elif username and password:
             user = authenticate(username=username, password=password)
