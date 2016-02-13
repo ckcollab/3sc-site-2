@@ -10,7 +10,7 @@ from loremipsum import generate_paragraph
 
 class TestPermissions(TestCase):
 
-    def test_check_admin_priviledges_are_required_and_working(self):
+    def test_check_admin_priviledges_are_required_for_applicants_list(self):
         assert "rest_framework.permissions.IsAdminUser" in settings.REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES']
         resp = self.client.get(reverse("api:applicants-list"))
         assert resp.status_code == 403
