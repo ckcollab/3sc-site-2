@@ -27,8 +27,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.RecipeSerializer
 
 
-# TODO Path, Topic, Course
-
 class PathViewSet(viewsets.ModelViewSet):
     queryset = Path.objects.all()
     serializer_class = serializers.PathSerializer
