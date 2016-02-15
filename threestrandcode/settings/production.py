@@ -1,6 +1,8 @@
 from .base import *
 
 
+DEBUG = False
+
 # Parse database configuration from $DATABASE_URL
 DATABASES['default'] = dj_database_url.config()
 
@@ -23,5 +25,5 @@ SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 # Rest auth stuff
 CORS_ORIGIN_WHITELIST = (
     '3strandcode.com',
-    'threesc-api.herokuapp.com'
+    'threesc-api.herokuapp.com',
 )

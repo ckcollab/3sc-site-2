@@ -21,6 +21,10 @@ class AssignmentViewSet(viewsets.ModelViewSet):
 
     # list method should just return for request.user not all!
 
+    def create(self, request, *args, **kwargs):
+        print("I'm hooked in!!!")
+        super()
+
 
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
