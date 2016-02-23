@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from model_mommy import mommy
@@ -6,6 +6,9 @@ from model_mommy import mommy
 from ..models import Assignment, Recipe, Course
 from ..recipes import SignUp, MakeGHPage, MakeRepository
 from applicants.models import Applicant
+
+
+User = get_user_model()
 
 
 class GithubAssignmentTests(TestCase):

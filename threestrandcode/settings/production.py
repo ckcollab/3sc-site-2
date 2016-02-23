@@ -24,6 +24,7 @@ SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 # Rest auth stuff
 CORS_ORIGIN_WHITELIST = (
+    # "localhost:8080",
     '3strandcode.com',
     'threesc-api.herokuapp.com',
 )

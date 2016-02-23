@@ -6,7 +6,7 @@ class SignUp(BaseRecipe):
 
     @classmethod
     def do_completed_check(cls, user):
-        return user.application.github_name is not None
+        return user.applicant.github_name is not None
 
 
 class MakeRepository(BaseRecipe):

@@ -15,7 +15,8 @@ class ApplicationSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
-            'essay'
+            'essay',
+            'github_name',
         )
 
 
