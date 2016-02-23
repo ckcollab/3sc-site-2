@@ -3,9 +3,9 @@
   "name": "3sc API",
   "repository": "https://github.com/3-strand-code/3sc-api",
   "env": {
-    "DJANGO_SETTINGS_MODULE": "threestrandcode.settings.production",
+    "DJANGO_SETTINGS_MODULE": "threestrandcode.settings.production"
   },
   "addons": [
-    "heroku-postgresql:hobby-dev",
+    "heroku-postgresql:hobby-dev"
   ]
 }
