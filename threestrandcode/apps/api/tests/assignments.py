@@ -1,7 +1,7 @@
 import random
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from faker import Factory
@@ -11,6 +11,9 @@ from model_mommy import mommy
 from applicants.models import Applicant
 from homework.models import Course, Recipe
 from homework.recipes import MakeGHPage
+
+
+User = get_user_model()
 
 
 class TestAssignments(TestCase):
@@ -27,10 +30,10 @@ class TestAssignments(TestCase):
             course=self.course,
         )
 
-    def test_create_assignment_hooks_github_repo(self):
-        # create user and all that shit
-        # post to assignment endpoint
-        # it should call "create_hook" on that repo
-        self.client.login(username="test", password="test")
-        self.client.post()
-        pass
+    # def test_create_assignment_hooks_github_repo(self):
+    #     # create user and all that shit
+    #     # post to assignment endpoint
+    #     # it should call "create_hook" on that repo
+    #     self.client.login(username="test", password="test")
+    #     self.client.post()
+    #     pass

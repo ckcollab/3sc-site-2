@@ -1,11 +1,14 @@
 import random
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from faker import Factory
 from loremipsum import generate_paragraph
+
+
+User = get_user_model()
 
 
 class TestPermissions(TestCase):
